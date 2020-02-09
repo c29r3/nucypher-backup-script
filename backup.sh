@@ -35,7 +35,7 @@ NU_VERSION=$(source $NU_VENV_FOLDER/bin/activate && nucypher --version | grep ve
 echo -e $green "NODE_IP: $NODE_IP\n Nucypher version: $NU_VERSION"
 
 echo -e $normal"Creating tar.gz archive"
-tar --exclude='*.tar.gz' --exclude='lightchaindata/*' -zcf ~/$BACKUP_NAME\_$NU_VERSION\_$NODE_IP\_$CURRENT_DATE.tar.gz \
+tar --exclude='*.tar.gz' --exclude='lightchaindata/*' --exclude='chaindata/*' -zcf ~/$BACKUP_NAME\_$NU_VERSION\_$NODE_IP\_$CURRENT_DATE.tar.gz \
 -C ~ nucypher  -C ~ .local -C ~ .ethereum
 
 echo -e $normal"$CURRENT_DATE Backup completed."
