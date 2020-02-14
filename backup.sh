@@ -2,7 +2,7 @@
 
 BACKUP_NAME="nucypher"
 # folder where nucypher-venv stored
-NU_VENV_FOLDER=~/nucypher/*env
+NU_VENV_FOLDER=~/nucypher-venv
 # folder where keys stored
 NU_MAIN_FOLDER=~/.local/share/nucypher/
 ETH_FOLDER=~/.ethereum
@@ -38,7 +38,8 @@ echo -e $green"Removing old backup files"
 rm ~/nucypher_*.tar.gz
 
 echo -e $normal"Creating tar.gz archive"
-tar --exclude='*.tar.gz' --exclude='lightchaindata/*' --exclude='chaindata/*' -zcf ~/$BACKUP_NAME\_$NU_VERSION\_$NODE_IP\_$CURRENT_DATE.tar.gz \
--C ~ nucypher  -C ~ .local -C ~ .ethereum
+tar --exclude='*.tar.gz' --exclude='geth.ipc' --exclude='lightchaindata/*' --exclude='chaindata/*' \
+-zcf ~/$BACKUP_NAME\_$NU_VERSION\_$HOSTNAME\_$CURRENT_DATE.tar.gz \
+-C ~ nucypher-venv  -C ~ .local -C ~ .ethereum
 
 echo -e $normal"$CURRENT_DATE Backup completed."
