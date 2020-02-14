@@ -34,6 +34,9 @@ echo -e $normal"Getting current Nucypher version"
 NU_VERSION=$(source $NU_VENV_FOLDER/bin/activate && nucypher --version | grep version | sed -r 's/^version //')
 echo -e $green "NODE_IP: $NODE_IP\n Nucypher version: $NU_VERSION"
 
+echo -e $green"Removing old backup files"
+rm ~/nucypher_*.tar.gz
+
 echo -e $normal"Creating tar.gz archive"
 tar --exclude='*.tar.gz' --exclude='lightchaindata/*' --exclude='chaindata/*' -zcf ~/$BACKUP_NAME\_$NU_VERSION\_$NODE_IP\_$CURRENT_DATE.tar.gz \
 -C ~ nucypher  -C ~ .local -C ~ .ethereum
