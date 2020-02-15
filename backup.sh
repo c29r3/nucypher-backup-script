@@ -1,6 +1,5 @@
 #!/bin/bash
 
-BACKUP_NAME="nucypher"
 # folder where nucypher-venv stored
 NU_VENV_FOLDER=~/nucypher-venv
 # folder where keys stored
@@ -27,19 +26,31 @@ for folder in $NU_VENV_FOLDER $ETH_FOLDER $NU_MAIN_FOLDER; do
     check_path $folder
 done
 
-echo -e $normal"Parse external node IP"
-NODE_IP=$(curl -s api.ipify.org)
 
 echo -e $normal"Getting current Nucypher version"
 NU_VERSION=$(source $NU_VENV_FOLDER/bin/activate && nucypher --version | grep version | sed -r 's/^version //')
-echo -e $green "NODE_IP: $NODE_IP\n Nucypher version: $NU_VERSION"
+echo -e $green "Nucypher version: $NU_VERSION"
+
+BACKUP_NAME=nucypher\_$NU_VERSION\_$HOSTNAME\_$CURRENT_DATE
+mkdir $BACKUP_NAME && cd $BACKUP_NAME
+
+echo -e $green"Copy ethereum keys"
+mkdir -p .ethereum/goerli/keystore && cp $ETH_FOLDER/goerli/keystore/* .ethereum/goerli/keystore/
+cp -r $ETH_FOLDER/keystore/ .ethereum/keystore/
+
+echo -e $green"Copy nucypher virtual env"
+cp -r $NU_VENV_FOLDER .
+
+echo -e $green"Copy Ursula data"
+mkdir -p .local/share/ && cp -r $NU_MAIN_FOLDER .local/share/
 
 echo -e $green"Removing old backup files"
-rm ~/nucypher_*.tar.gz
+rm ~/*$HOSTNAME*.tar.gz
 
 echo -e $normal"Creating tar.gz archive"
-tar --exclude='*.tar.gz' --exclude='geth.ipc' --exclude='lightchaindata/*' --exclude='chaindata/*' \
--zcf ~/$BACKUP_NAME\_$NU_VERSION\_$HOSTNAME\_$CURRENT_DATE.tar.gz \
--C ~ nucypher-venv  -C ~ .local -C ~ .ethereum
+tar -zcf ~/$BACKUP_NAME.tar.gz -C . nucypher-venv -C . .local -C . .ethereum
+
+echo "Removing temp folder"
+cd ~ && rm -rf ~/$BACKUP_NAME
 
 echo -e $normal"$CURRENT_DATE Backup completed."
