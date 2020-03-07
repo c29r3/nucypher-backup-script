@@ -5,7 +5,6 @@ What is archived:
 ```
 ~/.ethereum/keystore/*
 ~/.ethereum/goerli/keystore/*
-~/nucypher-venv/*
 ~/.local/share/nucypher/*
 ```
 
