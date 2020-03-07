@@ -38,8 +38,8 @@ echo -e $green"Copy ethereum keys"
 mkdir -p .ethereum/goerli/keystore && cp $ETH_FOLDER/goerli/keystore/* .ethereum/goerli/keystore/
 cp -r $ETH_FOLDER/keystore/ .ethereum/keystore/
 
-echo -e $green"Copy nucypher virtual env"
-cp -r $NU_VENV_FOLDER .
+#echo -e $green"Copy nucypher virtual env"
+#cp -r $NU_VENV_FOLDER .
 
 echo -e $green"Copy Ursula data"
 mkdir -p .local/share/ && cp -r $NU_MAIN_FOLDER .local/share/
