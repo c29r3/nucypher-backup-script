@@ -36,7 +36,9 @@ mkdir $BACKUP_NAME && cd $BACKUP_NAME
 
 echo -e $green"Copy ethereum keys"
 mkdir -p .ethereum/goerli/keystore && cp $ETH_FOLDER/goerli/keystore/* .ethereum/goerli/keystore/
-cp -r $ETH_FOLDER/keystore/ .ethereum/keystore/
+if [ -d "~/.ethereum/keystore/" ]; then
+    cp -r $ETH_FOLDER/keystore/ .ethereum/keystore/
+fi
 
 #echo -e $green"Copy nucypher virtual env"
 #cp -r $NU_VENV_FOLDER .
@@ -51,6 +53,6 @@ echo -e $normal"Creating tar.gz archive"
 time tar -zcf ~/$BACKUP_NAME.tar.gz -C . nucypher-venv -C . .local -C . .ethereum
 
 echo "Removing temp folder"
-cd ~ && rm -rf ~/$BACKUP_NAME
+rm -rf ~/$BACKUP_NAME
 
 echo -e $normal"$CURRENT_DATE Backup completed."
