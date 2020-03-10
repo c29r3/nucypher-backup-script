@@ -50,7 +50,7 @@ echo -e $green"Removing old backup files"
 rm ~/*$HOSTNAME*.tar.gz
 
 echo -e $normal"Creating tar.gz archive"
-time tar -zcf ~/$BACKUP_NAME.tar.gz -C . nucypher-venv -C . .local -C . .ethereum
+time tar -zcf ~/$BACKUP_NAME.tar.gz -C . .local -C . .ethereum
 
 echo "Removing temp folder"
 rm -rf ~/$BACKUP_NAME
