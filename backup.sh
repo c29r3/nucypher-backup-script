@@ -36,7 +36,7 @@ mkdir ~/$BACKUP_NAME && cd ~/$BACKUP_NAME
 
 echo -e $green"Copy ethereum keys"
 mkdir -p .ethereum/goerli/keystore && cp $ETH_FOLDER/goerli/keystore/* .ethereum/goerli/keystore/
-if [ -d "~/.ethereum/keystore/" ]; then
+if [ -d ~/.ethereum/keystore/ ]; then
     cp -r $ETH_FOLDER/keystore/ .ethereum/keystore/
 fi
 
