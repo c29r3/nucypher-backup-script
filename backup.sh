@@ -32,7 +32,7 @@ NU_VERSION=$(source $NU_VENV_FOLDER/bin/activate && nucypher --version | grep ve
 echo -e $green "Nucypher version: $NU_VERSION"
 
 BACKUP_NAME=nucypher\_$NU_VERSION\_$HOSTNAME\_$CURRENT_DATE
-mkdir $BACKUP_NAME && cd $BACKUP_NAME
+mkdir ~/$BACKUP_NAME && cd ~/$BACKUP_NAME
 
 echo -e $green"Copy ethereum keys"
 mkdir -p .ethereum/goerli/keystore && cp $ETH_FOLDER/goerli/keystore/* .ethereum/goerli/keystore/
